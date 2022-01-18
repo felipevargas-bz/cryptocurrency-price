@@ -3,7 +3,6 @@ import json
 import time
 
 
-
 class Binance_websocket():
 
     def __init__(self,symbol):

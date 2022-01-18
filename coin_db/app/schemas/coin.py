@@ -6,7 +6,7 @@ from pydantic import BaseModel
 
 class BaseCoin(BaseModel):
     name : Optional[str]
-    E : Optional[datetime]
+    E : Optional[str] = datetime.now().strftime('%b %dth, %Y - %H:%M:%S hrs')
     t : Optional[str]
     T : Optional[str]
     s : Optional[str]
@@ -31,7 +31,7 @@ class CreateCoin(BaseCoin):
 
 
 class PayloadCoin(BaseModel):
-    pass
+    name: str
 
 
 class UpdateCoin(BaseModel):
@@ -41,7 +41,7 @@ class UpdateCoin(BaseModel):
 class CoinInDB(BaseModel):
     id: int
     name : Optional[str]
-    E : Optional[str]
+    E : Optional[str] = datetime.now().strftime('%b %dth, %Y - %H:%M:%S hrs')
     t : Optional[str]
     T : Optional[str]
     s : Optional[str]
@@ -66,7 +66,6 @@ class CoinInDB(BaseModel):
 
 class CoinResponse(BaseModel):
     name : Optional[str]
-    E : Optional[str]
     t : Optional[str]
     T : Optional[str]
     s : Optional[str]

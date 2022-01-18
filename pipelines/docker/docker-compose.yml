@@ -1,46 +1,41 @@
 version: "3.2"
 
 services:
-  coin:
-    image: coin-db-service
+  BTCUSDT:
+    image: btcusdt-service
     build:
-      context: ..
-      dockerfile: docker/Dockerfile
-    command: uvicorn app.main:app --reload --workers 1 --host 0.0.0.0 --port 8085
+      context: .
+      dockerfile: ./Dockerfile
+    command: bash -c "python3 ./BTCUSDT/collector.py"
     volumes:
-      - ../:/usr/src/app/
-    ports:
-      - 8081:8085
-      - 10008:10008
-    environment:
-      - WEB_APP_VERSION=1.0.0
-      - WEB_APP_TITLE=coin-db
-      - WEB_APP_DESCRIPTION=Database service for Technical Test
-      - POSTGRES_DATABASE_URL=postgres://postgres:postgres@coin-db:5432/coin_dev
-      - ENVIRONMENT=dev
-      - DEFAULT_EXPIRE_TIME=3600
+      - ../BTCUSDT/:/usr/src/pipelines/BTCUSDT/
     networks:
       - coin
 
-  coin-db:
-    image: coin-db
+  ETHUSDT:
+    image: ethusdt-service
     build:
-      context: ../db
-      dockerfile: Dockerfile
-    expose:
-      - 5432
-    ports:
-      - "5436:5432"
-    environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
+      context: .
+      dockerfile: ./Dockerfile
+    command: python3 ./ETHUSDT/collector.py
     volumes:
-      - db_coin:/var/lib/postgresql/data
+      - ../ETHUSDT/:/usr/src/pipelines/ETHUSDT/
+    networks:
+      - coin
+
+  DOGEUSDT:
+    image: dogeusdt-service
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    command: python3 ./DOGEUSDT/collector.py
+    volumes:
+      - ../DOGEUSDT/:/usr/src/pipelines/DOGEUSDT/
     networks:
       - coin
 
 volumes:
-  db_coin:
+  pipelines_coin:
     external: true
 
 networks:

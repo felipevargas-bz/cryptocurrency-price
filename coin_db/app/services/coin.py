@@ -22,11 +22,14 @@ class CoinService:
         return None
 
     async def get_all(
-        self, *, coin: PayloadCoin, name: str, skip: int, limit: int
+        self, *, coin: PayloadCoin, skip: int, limit: int
     ) -> List:
-        coin_data = coin.dict(exclude_none=True)
+        if coin:
+            coin_data = coin.dict(exclude_none=True)
+        else:
+            coin_data = None
         coins = await self.__coin_queries.get_all(
-            payload=coin_data, name=name, skip=skip, limit=limit
+            payload=coin_data, skip=skip, limit=limit
         )
         return coins
 
