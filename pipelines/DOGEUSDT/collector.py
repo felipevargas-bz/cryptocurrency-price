@@ -1,7 +1,7 @@
 import websocket
 import json
 import time
-
+import requests
 
 
 class Binance_websocket():
@@ -37,23 +37,24 @@ class Binance_websocket():
     def on_message(self,ws, msg):
         msg = json.loads(msg)  # msg devuelve la cadena que se convertirá en formato json
 
-        if 'data' in msg: # Debido a que la primera línea no son datos, excluya la impresión sin datos
+        # if 'data' in msg: # Debido a que la primera línea no son datos, excluya la impresión sin datos
 
-            #conversión de marca de tiempo
-            tupTime = time.localtime(msg['data']['E']/1000)
-            otherStyleTime = time.strftime("%Y-%m-%d %H:%M:%S", tupTime)
-            msg['data']['E']=otherStyleTime
+        #     #conversión de marca de tiempo
+        #     tupTime = time.localtime(msg['data']['E']/1000)
+        #     otherStyleTime = time.strftime("%Y-%m-%d %H:%M:%S", tupTime)
+        #     msg['data']['E']=otherStyleTime
 
 
-        print(msg)
+        # print(msg["data"]["E"])
 
 
 
         if 'ping' in msg:
             ws.send(json.dumps({"pong": msg["ping"]})) # Recibir el ping enviado por la plataforma, devolver pong, de lo contrario se desconectará
 
-        with open('msg.json', 'a') as f:
-            json.dump(msg, f, indent=4) # Guardar en archivo json
+        url = "http://docker_coin_1:8085/api/coin/"
+        response = requests.post(url, json=json.dumps(msg["data"])) # Enviar los datos al servidor
+        print(response)
 
 
     def run(self):

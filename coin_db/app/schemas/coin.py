@@ -1,12 +1,12 @@
 from datetime import datetime
 from typing import Optional
 
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 
 
 class BaseCoin(BaseModel):
     name : Optional[str]
-    E : Optional[str] = datetime.now().strftime('%b %dth, %Y - %H:%M:%S hrs')
+    E : Optional[str] = Field(datetime.now().strftime('%b %dth, %Y - %H:%M:%S hrs'))
     t : Optional[str]
     T : Optional[str]
     s : Optional[str]
@@ -41,7 +41,7 @@ class UpdateCoin(BaseModel):
 class CoinInDB(BaseModel):
     id: int
     name : Optional[str]
-    E : Optional[str] = datetime.now().strftime('%b %dth, %Y - %H:%M:%S hrs')
+    E : Optional[str] = Field(datetime.now().strftime('%b %dth, %Y - %H:%M:%S hrs'))
     t : Optional[str]
     T : Optional[str]
     s : Optional[str]

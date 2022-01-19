@@ -6,7 +6,7 @@ services:
     build:
       context: .
       dockerfile: ./Dockerfile
-    command: bash -c "python3 ./BTCUSDT/collector.py"
+    command: bash -c "python3 BTCUSDT/collector.py"
     volumes:
       - ../BTCUSDT/:/usr/src/pipelines/BTCUSDT/
     networks:
@@ -17,7 +17,7 @@ services:
     build:
       context: .
       dockerfile: ./Dockerfile
-    command: python3 ./ETHUSDT/collector.py
+    command: python3 ETHUSDT/collector.py
     volumes:
       - ../ETHUSDT/:/usr/src/pipelines/ETHUSDT/
     networks:
@@ -28,7 +28,7 @@ services:
     build:
       context: .
       dockerfile: ./Dockerfile
-    command: python3 ./DOGEUSDT/collector.py
+    command: python3 DOGEUSDT/collector.py
     volumes:
       - ../DOGEUSDT/:/usr/src/pipelines/DOGEUSDT/
     networks:
