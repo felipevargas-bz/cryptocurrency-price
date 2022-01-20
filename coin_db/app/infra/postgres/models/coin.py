@@ -8,7 +8,6 @@ class Coin(models.Model):
     E = fields.CharField(max_length=50, null=True)
     t = fields.CharField(max_length=50, null=True)
     T = fields.CharField(max_length=50, null=True)
-    s = fields.CharField(max_length=50, null=True)
     i = fields.CharField(max_length=50, null=True)
     f = fields.CharField(max_length=50, null=True)
     L = fields.CharField(max_length=50, null=True)

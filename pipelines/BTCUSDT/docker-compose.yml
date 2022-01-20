@@ -1,0 +1,21 @@
+version: "3.2"
+
+services:
+  BTCUSDT:
+    image: btcusdt-service
+    build:
+      context: .
+      dockerfile: ../Dockerfile
+    command: bash -c "python3 BTCUSDT/collector.py"
+    volumes:
+      - ../BTCUSDT/:/usr/src/pipelines/BTCUSDT/
+    networks:
+      - coin
+
+volumes:
+  pipelines_coin:
+    external: true
+
+networks:
+  coin:
+    external: true

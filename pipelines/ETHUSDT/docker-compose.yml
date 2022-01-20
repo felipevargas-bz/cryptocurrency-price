@@ -1,0 +1,21 @@
+version: "3.2"
+
+services:
+  ETHUSDT:
+    image: ethusdt-service
+    build:
+      context: .
+      dockerfile: ../Dockerfile
+    command: python3 ETHUSDT/collector.py
+    volumes:
+      - ../ETHUSDT/:/usr/src/pipelines/ETHUSDT/
+    networks:
+      - coin
+
+volumes:
+  pipelines_coin:
+    external: true
+
+networks:
+  coin:
+    external: true

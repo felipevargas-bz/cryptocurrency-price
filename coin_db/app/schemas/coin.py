@@ -9,7 +9,6 @@ class BaseCoin(BaseModel):
     E : Optional[str] = Field(datetime.now().strftime('%b %dth, %Y - %H:%M:%S hrs'))
     t : Optional[str]
     T : Optional[str]
-    s : Optional[str]
     i : Optional[str]
     f : Optional[str]
     L : Optional[str]
@@ -44,7 +43,6 @@ class CoinInDB(BaseModel):
     E : Optional[str] = Field(datetime.now().strftime('%b %dth, %Y - %H:%M:%S hrs'))
     t : Optional[str]
     T : Optional[str]
-    s : Optional[str]
     i : Optional[str]
     f : Optional[str]
     L : Optional[str]
@@ -68,7 +66,6 @@ class CoinResponse(BaseModel):
     name : Optional[str]
     t : Optional[str]
     T : Optional[str]
-    s : Optional[str]
     i : Optional[str]
     f : Optional[str]
     L : Optional[str]
