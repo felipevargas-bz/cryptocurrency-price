@@ -49,7 +49,7 @@ class Binance_websocket():
         if 'ping' in msg:
             ws.send(json.dumps({"pong": msg["ping"]})) # Recibir el ping enviado por la plataforma, devolver pong, de lo contrario se desconectará
 
-        url = "http://docker_coin_1:8085/api/coin/"
+        url = "http://coin:8085/api/coin/"
         response = requests.post(url, json=dict) # Enviar los datos al servidor
         time.sleep(3) # Esperar 3 segundo
         print(response)
